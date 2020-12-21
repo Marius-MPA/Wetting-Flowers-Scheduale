@@ -1,0 +1,105 @@
+
+*{
+    margin: 0;
+    border: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    background: pink;
+    text-align: center;
+    margin: 0 auto;
+    height: auto;
+}
+.container h1 {
+    background-color: rgb(62, 238, 39);
+    padding: 0.5rem;
+}
+main{
+    width: 100%;
+    /* height: 100%; */
+    padding: 1rem;
+}
+.urgentActions{
+    background-color: rgb(237, 238, 195);
+}
+.urgentActions h2 {
+    padding-top: 1rem;
+}
+.urgentActions h2 span{
+    animation: changeColor 5s infinite; 
+}
+@keyframes changeColor {
+  0%   {color:red;}
+  50%  {color:blue;}
+  100% {color:red;}
+}
+main h2 {
+    padding: 1rem;
+    padding-bottom: 0;
+}
+.allFlowers,
+.needWater {
+    width: 100%;
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem;
+}
+.flower{
+    min-width: 230px;
+    padding: 0.5rem;
+    background-color: darkcyan;
+    border: 1px solid black;
+    border-radius: .5rem;
+    margin: 0.5rem 0.5rem;
+    text-align: left;
+}
+.flower h3,
+.flower h4,
+.flower .image{
+    text-align: center;
+}
+
+
+@media only screen and (min-width: 768px){
+    .allFlowers,
+    .needWater {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+   
+}
+@media only screen and (min-width: 1440px){
+    .container {
+        height: calc(100vh);
+    }
+}
+
+.todayWet{
+    margin: 0.5rem auto;
+    width: 80%;
+    border: 1px solid black;
+    border-radius: 0.3rem;
+    padding: 0.3rem;
+    text-align: center;
+    background-color: crimson;
+}
+.needWater .flower{
+    min-width: 200px;
+    background-color: coral;
+}
+.needWater .flower img{
+    width: 130px;
+    height: auto;
+}
+.buttons button {
+    padding: 0.3rem;
+    border-radius: 0.3rem;
+    cursor: pointer;
+}
+.buttons button:hover {
+    color: white;
+    background: grey;
+}
