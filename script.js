@@ -31,7 +31,7 @@ class Muscate extends Flower {
 
 const muscata1 = new Muscate(2, 'Rosa1', 'muscate-1', 'Monday', 'balconyOne', 3, true, true);
 const muscata2 = new Muscate(3, 'Rosa2', 'muscate-2', 'Tuesday', 'inside', 5, false, true);
-const muscata3 = new Muscate(4, 'Rosa3', 'muscate-3', 'Monday', 'balconyTwo', 4, true, false);
+const muscata3 = new Muscate(5, 'Rosa3', 'muscate-3', 'Monday', 'balconyTwo', 4, true, false);
 
 allMyPlants.push(muscata1, muscata2, muscata3 );
 
@@ -89,19 +89,49 @@ function findDuplicate(arr){
             object[elem.id] = 1;
         }
     });
-    
     for(let prop in object){
         if(object[prop] >= 2){
             result.push(prop)
         }
     };
+    console.log(result);
     
     let elemWithDoubleId = result.map(function(item){
         return arr.filter(elem => elem.id == item)
     });
-    return elemWithDoubleId;
+    return elemWithDoubleId;   
 };
-console.log(findDuplicate(allMyPlants));
+
+let duplicateId = findDuplicate(allMyPlants);
+let duplicateArr = duplicateId[0];
+console.log(duplicateArr);
+
+setTimeout(function(){
+    if(duplicateArr.length > 0){
+        alert('You have many flowers with same ID !')
+    }
+}, 3000);
+
+//display flower with duplicate ID
+const duplicateIdDOM = document.querySelector('.duplicateID');
+function duplicateID(arr){
+    let result = '';
+    arr.forEach(flower =>{
+        result +=`
+            <tr>
+                <td class="name">${flower.name}</td>
+                <td>${flower.id}</td>
+                <td>
+                <div class="buttons">
+                    <button class="yes">YES</button>
+                </div>
+                </td>
+            </tr>
+        `
+    })
+    return duplicateIdDOM.innerHTML = result;
+}
+duplicateID(duplicateArr)
 
 // find flowers that need water today
 let today = new Date();
@@ -163,9 +193,6 @@ btnsYes.forEach(button => {
     })
 })
 
-// if(result.innerHTML === ' '){
-//     result.innerHTML = 'OK'
-// }
 setTimeout(function(){console.log(allMyPlants)}, 5000);
 
 // de facut : - de introdus item nou de catre utilizator

@@ -12,7 +12,7 @@
     height: auto;
 }
 .container h1 {
-    background-color: rgb(62, 238, 39);
+    background-color: royalblue;
     padding: 0.5rem;
 }
 main{
@@ -61,20 +61,8 @@ main h2 {
 .flower .image{
     text-align: center;
 }
-
-
-@media only screen and (min-width: 768px){
-    .allFlowers,
-    .needWater {
-        flex-direction: row;
-        flex-wrap: wrap;
-    }
-   
-}
-@media only screen and (min-width: 1440px){
-    .container {
-        height: calc(100vh);
-    }
+.image img {
+    border-radius: 0.5rem;
 }
 
 .todayWet{
@@ -94,12 +82,56 @@ main h2 {
     width: 130px;
     height: auto;
 }
-.buttons button {
+button {
     padding: 0.3rem;
     border-radius: 0.3rem;
     cursor: pointer;
 }
-.buttons button:hover {
+button:hover {
     color: white;
     background: grey;
+}
+
+/* duplicate Table */
+section.duplicate {
+    background: rgb(240, 236, 236);
+    text-align: center;
+    width: 100%;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+table, th, td {
+    border: 1px solid black;
+    padding: 0.3rem;
+    text-align: center;
+}
+td[class="name"]{
+    text-align: left;
+}
+table caption {
+    padding: 1rem
+}
+footer{
+    padding: 1.5rem;
+    background:royalblue;
+}
+@media only screen and (min-width: 768px){
+    .allFlowers,
+    .needWater {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    table {
+        width: 75%!important;
+        margin: 0 auto;
+    }
+}
+@media only screen and (min-width: 1440px){
+    table {
+        width: 50%!important;
+    }
 }
