@@ -17,8 +17,10 @@ class Flower {
     };
 }
 
-const flower1 = new Flower(1, 'Lily', 'flower-1', 'Monday', 'home', 3, true)
-allMyPlants.push(flower1);
+const flower1 = new Flower(1, 'Lily', 'flower-1', 'Monday', 'home', 3, true);
+const flower2 = new Flower(8, 'Mili', 'flower-2', 'Thursday', 'outside', 7, true);
+const flower3 = new Flower(9, 'Wini', 'flower-3', 'Friday', 'home', 5, true);
+allMyPlants.push(flower1, flower2, flower3);
 console.log(flower1);
 
 // create sub-class
@@ -30,7 +32,7 @@ class Muscate extends Flower {
 }
 
 const muscata1 = new Muscate(2, 'Rosa1', 'muscate-1', 'Monday', 'balconyOne', 3, true, true);
-const muscata2 = new Muscate(3, 'Rosa2', 'muscate-2', 'Tuesday', 'inside', 5, false, true);
+const muscata2 = new Muscate(3, 'Rosa2', 'muscate-2', 'Thursday', 'inside', 5, false, true);
 const muscata3 = new Muscate(5, 'Rosa3', 'muscate-3', 'Monday', 'balconyTwo', 4, true, false);
 
 allMyPlants.push(muscata1, muscata2, muscata3 );
@@ -45,7 +47,7 @@ class Cactusi extends Flower {
 
 const cactus1 = new Cactusi (5, 'Cactus1', 'cactus-1', 'Sameday', 'balconyOne', 1, true, false);
 const cactus2 = new Cactusi (6, 'Cactus2', 'cactus-2', 'Tuesday', 'inside', 4, false, true);
-const cactus3 = new Cactusi (7, 'Cactus3', 'cactus-3', 'Sunday', 'balconyOne', 1, false, false);
+const cactus3 = new Cactusi (7, 'Cactus3', 'cactus-3', 'Tuesday', 'balconyOne', 1, false, false);
 
 allMyPlants.push(cactus1, cactus2, cactus3);
 
@@ -58,7 +60,9 @@ const allFlowersDOM = document.querySelector('.allFlowers');
 
 function displayFlowers(arr){
     let result = '';
-    arr.forEach(flower =>{
+    arr
+    .sort((a,b) => (a.id < b.id) ? -1 : 1)
+    .forEach(flower =>{
         result += `
         <div class="flower">
             <h3>${flower.name}</h3>
@@ -153,12 +157,13 @@ const needWaterToday = allMyPlants.filter(elem => elem.wetDay === wetDay);
 console.log(needWaterToday);
 
 // display flowers that needs water today
-const needWaterDOM = document.querySelector(".needWater");
+let needWaterDOM = document.querySelector('.needWater');
 
 function needsWaterToday(arr){
     let result = '';
     arr.forEach(flower =>{
         result += `
+        
         <div class="flower">
             <h3>${flower.name}</h3>
             <h4>ID : ${flower.id}</h4>
@@ -173,13 +178,13 @@ function needsWaterToday(arr){
                 </div>
             </div>
         </div>
+        
         `
     })
     return needWaterDOM.innerHTML = result;
 }
 
 needsWaterToday(needWaterToday);
-
 
 // status of flowers, regarding water
 Flower.prototype.isWet = false;
@@ -188,11 +193,42 @@ Flower.prototype.isWet = false;
 const btnsYes = [...document.querySelectorAll('.yes')];
 
 btnsYes.forEach(button => {
-    button.addEventListener('click', event => {
-        event.target.parentElement.parentElement.parentElement.remove(); 
+    button.addEventListener('click', event => { 
+        event.target.parentElement.parentElement.parentElement.remove();
+        //this works too
+        // event.target.parentElement.parentElement.parentElement.parentElement.removeChild(event.target.parentElement.parentElement.parentElement); 
+        
     })
 })
 
 setTimeout(function(){console.log(allMyPlants)}, 5000);
+
+// hide title needWater, show title noWater
+const noNeedWaterDOM = document.querySelector('.fromBeginning');
+const flowersNeedWaterDOM = document.querySelector('.flowersNeedWater');
+const btnConfirmDOM = document.querySelector('.confirmWater');
+
+// check at beggining of day
+if(!needWaterDOM.firstChild){
+    noNeedWaterDOM.classList.remove('invisible');
+    noNeedWaterDOM.classList.add('visible');
+    flowersNeedWaterDOM.classList.add('invisible');
+    btnConfirmDOM.classList.add('invisible'); 
+}
+
+// change status after we click 'YES' at each plant and 'Confirm'
+btnConfirmDOM.addEventListener('click', function(){
+    const needWaterDOM1 = document.querySelector('.needWater');
+    const afterWetting = document.querySelector('.afterWetting');
+    let flowerTest = needWaterDOM.getElementsByClassName('flower');
+    console.log(flowerTest);
+    if(needWaterDOM1.getElementsByClassName('flower').length == 0){
+        afterWetting.classList.remove('invisible');
+        afterWetting.classList.add('visible');
+        flowersNeedWaterDOM.classList.add('invisible');
+        btnConfirmDOM.classList.add('invisible');
+    } 
+});
+
 
 // de facut : - de introdus item nou de catre utilizator
