@@ -33,9 +33,10 @@ class Muscate extends Flower {
 
 const muscata1 = new Muscate(2, 'Rosa1', 'muscate-1', 'Monday', 'balconyOne', 3, true, true);
 const muscata2 = new Muscate(3, 'Rosa2', 'muscate-2', 'Thursday', 'inside', 5, false, true);
-const muscata3 = new Muscate(5, 'Rosa3', 'muscate-3', 'Monday', 'balconyTwo', 4, true, false);
+const muscata3 = new Muscate(4, 'Rosa3', 'muscate-3', 'Wednesday', 'balconyTwo', 4, true, false);
+const muscata4 = new Muscate(10, 'Rosa4', 'muscate-3', 'Tuesday', 'balconyTwo', 12, true, false);
 
-allMyPlants.push(muscata1, muscata2, muscata3 );
+allMyPlants.push(muscata1, muscata2, muscata3, muscata4 );
 
 // create sub-class
 class Cactusi extends Flower {
@@ -45,8 +46,8 @@ class Cactusi extends Flower {
     };
 };
 
-const cactus1 = new Cactusi (5, 'Cactus1', 'cactus-1', 'Sameday', 'balconyOne', 1, true, false);
-const cactus2 = new Cactusi (6, 'Cactus2', 'cactus-2', 'Tuesday', 'inside', 4, false, true);
+const cactus1 = new Cactusi (5, 'Cactus1', 'cactus-1', 'Thursday', 'balconyOne', 1, true, false);
+const cactus2 = new Cactusi (6, 'Cactus2', 'cactus-2', 'Wednesday', 'inside', 4, false, true);
 const cactus3 = new Cactusi (7, 'Cactus3', 'cactus-3', 'Tuesday', 'balconyOne', 1, false, false);
 
 allMyPlants.push(cactus1, cactus2, cactus3);
@@ -107,7 +108,14 @@ function findDuplicate(arr){
 };
 
 let duplicateId = findDuplicate(allMyPlants);
-let duplicateArr = duplicateId[0];
+console.log(duplicateId);
+let duplicateArr;
+if(duplicateId.length == 0){
+    duplicateArr = [];
+} else {
+    duplicateArr = duplicateId[0];
+}
+
 console.log(duplicateArr);
 
 setTimeout(function(){
@@ -120,19 +128,22 @@ setTimeout(function(){
 const duplicateIdDOM = document.querySelector('.duplicateID');
 function duplicateID(arr){
     let result = '';
-    arr.forEach(flower =>{
-        result +=`
-            <tr>
-                <td class="name">${flower.name}</td>
-                <td>${flower.id}</td>
-                <td>
-                <div class="buttons">
-                    <button class="yes">YES</button>
-                </div>
-                </td>
-            </tr>
-        `
-    })
+    
+        arr.forEach(flower =>{
+            result +=`
+                <tr>
+                    <td class="name">${flower.name}</td>
+                    <td>${flower.id}</td>
+                    <td>
+                    <div class="buttons">
+                        <button class="yes">YES</button>
+                    </div>
+                    </td>
+                </tr>
+            `
+        })
+    
+    
     return duplicateIdDOM.innerHTML = result;
 }
 duplicateID(duplicateArr)
@@ -172,7 +183,7 @@ function needsWaterToday(arr){
             </div>
             <div class="wetDay">I need water on: <strong>${flower.wetDay}</strong></div>
             <div class="todayWet">
-                <p>Did I wet it today ?<p>
+                <p>Have I watered it today ?<p>
                 <div class="buttons">
                     <button class="yes">YES</button>
                 </div>
